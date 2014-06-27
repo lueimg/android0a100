@@ -1,6 +1,9 @@
 package com.tutorial.myapplication2.app;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.provider.Contacts;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +23,8 @@ public class MainActivity extends ActionBarActivity {
         Intent i = new Intent(this, SecondActivity.class);
         i.putExtra("valorTest","true");
 
-        startActivity(i);
+        //startActivity(i);
+        access();
 
     }
 
@@ -74,5 +78,20 @@ public class MainActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void access(){
+
+        ContentResolver cr = getContentResolver();
+        Cursor cur = cr.query(Contacts.People.CONTENT_URI,null,null,null,null);
+
+        if(cur.getCount() > 0 ){
+            while (cur.moveToNext()){
+                String id = cur.getString(cur.getColumnIndex(Contacts.People._ID));
+                String name = cur.getString(cur.getColumnIndex(Contacts.People.DISPLAY_NAME));
+            }
+        }
+
+    }
+
 
 }
