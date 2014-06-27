@@ -2,6 +2,7 @@ package com.tutorial.myapplication2.app;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -12,8 +13,41 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.d("Application","onCreate");
+
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("Application","start");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Application","resume");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Application","pause");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
