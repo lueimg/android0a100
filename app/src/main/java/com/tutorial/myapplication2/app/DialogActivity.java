@@ -2,6 +2,7 @@ package com.tutorial.myapplication2.app;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -20,7 +21,9 @@ public class DialogActivity extends Activity {
         //showDialog();
         //showDialogWithList();
 
-        showDialogWithCheckbox();
+       // showDialogWithCheckbox();
+
+        showRingDialog();
 
     }
 
@@ -66,15 +69,36 @@ public class DialogActivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle("Pick a color");
-        builder.setSingleChoiceItems(items, -1 ,new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getApplicationContext(),items[i],Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), items[i], Toast.LENGTH_SHORT).show();
             }
         });
 
         AlertDialog alert = builder.create();
         alert.show();
+
+
+    }
+
+
+    private void showRingDialog(){
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(DialogActivity.this,"Espere","Descargando...",true);
+        ringProgressDialog.setCancelable(true);
+
+        new Thread( new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                ringProgressDialog.dismiss();
+            }
+        }).start();
 
 
     }
