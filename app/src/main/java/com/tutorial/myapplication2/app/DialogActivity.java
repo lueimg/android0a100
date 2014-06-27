@@ -2,10 +2,16 @@ package com.tutorial.myapplication2.app;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.widget.Toast;
+
+
 
 /**
  * Created by luismori on 27/06/14.
@@ -14,6 +20,9 @@ public class DialogActivity extends Activity {
 
     final CharSequence[] items = {"blue","red","yellow"};
 
+
+    private ProgressDialog barProgressDialog;
+    private Handler updateBarHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +32,9 @@ public class DialogActivity extends Activity {
 
        // showDialogWithCheckbox();
 
-        showRingDialog();
+        //showRingDialog();
+
+        showBarDialog();
 
     }
 
@@ -103,6 +114,42 @@ public class DialogActivity extends Activity {
 
     }
 
+    private void showBarDialog() {
+
+        barProgressDialog = new ProgressDialog(DialogActivity.this);
+
+        barProgressDialog.setTitle("Espere...");
+        barProgressDialog.setMessage("Descargando...");
+        barProgressDialog.setProgressStyle(barProgressDialog.STYLE_HORIZONTAL);
+        barProgressDialog.setProgress(0);
+        barProgressDialog.setMax(20);
+        barProgressDialog.show();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while ( barProgressDialog.getProgress() <= barProgressDialog.getMax()) {
+
+                        Thread.sleep(2000);
+                        updateBarHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                barProgressDialog.incrementProgressBy(2);
+                            }
+                        });
+                        if (barProgressDialog.getProgress() == barProgressDialog.getMax()) {
+                            barProgressDialog.dismiss();
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }).start();
+    }
 
 
 }
