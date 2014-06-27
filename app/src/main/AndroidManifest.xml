@@ -36,6 +36,10 @@
         </activity>
 
         <activity android:name=".SensorActivity">
+
+        </activity>
+
+        <activity android:name=".DialogActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
