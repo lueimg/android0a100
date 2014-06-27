@@ -19,6 +19,10 @@
 
         </activity>
 
+        <activity android:name="com.tutorial.myapplication2.app.SecondActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

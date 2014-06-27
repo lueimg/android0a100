@@ -1,5 +1,6 @@
 package com.tutorial.myapplication2.app;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +15,12 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d("Application","onCreate");
+       Log.d("Application","onCreate");
+        // instanaciamos un intento y le decimos que clase lo llama y que clase queremos que inicie
+        Intent i = new Intent(this, SecondActivity.class);
+        i.putExtra("valorTest","true");
+
+        startActivity(i);
 
     }
 
