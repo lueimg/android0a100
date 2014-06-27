@@ -10,11 +10,17 @@ import android.widget.Toast;
  * Created by luismori on 27/06/14.
  */
 public class DialogActivity extends Activity {
+
+    final CharSequence[] items = {"blue","red","yellow"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        showDialog();
+        //showDialog();
+        //showDialogWithList();
+
+        showDialogWithCheckbox();
 
     }
 
@@ -35,6 +41,42 @@ public class DialogActivity extends Activity {
                     }
                 })
                 .show();
+    }
+
+    private void showDialogWithList(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Pick a color");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(),items[i],Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
+
+    }
+
+    private void showDialogWithCheckbox(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Pick a color");
+        builder.setSingleChoiceItems(items, -1 ,new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(),items[i],Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
+
     }
 
 
