@@ -18,49 +18,37 @@ import java.io.File;
  */
 public class NotaActivity extends Activity {
 
+
     private Button notesButton;
     private LinearLayout linearLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_notas);
-
-
-        linearLayout = (LinearLayout)findViewById(R.id.layoutNotes);
-
-        notesButton = (Button)findViewById(R.id.buttonCreate);
+        linearLayout = (LinearLayout) findViewById(R.id.layoutNotes);
+        notesButton = (Button) findViewById(R.id.buttonCreate);
+        readAndDisplayNotes();
         notesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i  = new Intent(getApplicationContext(), SaveNoteActivity.class);
+                Intent i = new Intent(getApplicationContext(), SaveNoteActivity.class);
                 startActivity(i);
             }
         });
-
-
     }
 
-
-    private void readAndDisplayNotes(){
-
+    private void readAndDisplayNotes() {
         File dirFiles = getFilesDir();
-
-        for (String strFile : dirFiles.list()){
+        for (String strFile : dirFiles.list()) {
             TextView mTextView = new TextView(this);
             mTextView.setText(strFile);
-
             mTextView.setLayoutParams(new LinearLayout.LayoutParams(
-                   LinearLayout.LayoutParams.FILL_PARENT,
-                   LinearLayout.LayoutParams.WRAP_CONTENT
-
-            ));
+                    LinearLayout.LayoutParams.FILL_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
 
             linearLayout.addView(mTextView);
         }
-
     }
-
-
 
 }
