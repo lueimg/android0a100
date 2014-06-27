@@ -34,7 +34,9 @@ public class DialogActivity extends Activity {
 
         //showRingDialog();
 
-        showBarDialog();
+        //showBarDialog();
+
+        showCustomDialog();
 
     }
 
@@ -150,6 +152,33 @@ public class DialogActivity extends Activity {
             }
         }).start();
     }
+
+
+    private void showCustomDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+
+        builder.setView(inflater.inflate(R.layout.dialog_custom,null))
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+
+    }
+
 
 
 }
