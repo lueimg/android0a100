@@ -2,7 +2,9 @@ package com.tutorial.myapplication2.app;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.provider.Contacts;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,18 +15,23 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 
+
+    private HelloBroadCastReceiver mReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       Log.d("Application","onCreate");
+        Log.d("Application","onCreate");
         // instanaciamos un intento y le decimos que clase lo llama y que clase queremos que inicie
-        Intent i = new Intent(this, SecondActivity.class);
-        i.putExtra("valorTest","true");
+        //Intent i = new Intent(this, SecondActivity.class);
+        //i.putExtra("valorTest","true");
 
         //startActivity(i);
-        access();
+        //access();
+
+
 
     }
 
@@ -42,6 +49,9 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onResume() {
+        this.mReceiver = new HelloBroadCastReceiver();
+        registerReceiver(this.mReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+
         super.onResume();
         Log.d("Application","resume");
 
@@ -49,6 +59,8 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onPause() {
+        //CUANDO PAUSA LA APLICACION DETENEMOS EL RECEIVER
+        unregisterReceiver(this.mReceiver);
         super.onPause();
         Log.d("Application","pause");
 
