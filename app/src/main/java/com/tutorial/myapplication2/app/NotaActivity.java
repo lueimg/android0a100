@@ -3,6 +3,7 @@ package com.tutorial.myapplication2.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -36,6 +37,37 @@ public class NotaActivity extends Activity {
                 startActivity(i);
             }
         });
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Nota Activity","resume");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Nota Activity","restart");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Nota Activity","pause");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("Nota Activity","destroy");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("Nota Activity","start");
     }
 
     private void readAndDisplayNotes() {
